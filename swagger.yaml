@@ -1,0 +1,147 @@
+swagger: "2.0"
+info:
+  description: "Exercice formation DWWM - API placeholder Blog"
+  version: "1.0.0"
+  title: "Swagger BLOG"
+  contact:
+    email: "thomas.galiez@live.fr"
+host: "localhost:3000"
+basePath: "/"
+tags:
+- name: "todo"
+schemes:
+- "http"
+paths:
+  /todo:
+    post:
+      tags:
+      - "todo"
+      summary: "Create todo"
+      operationId: "createTodo"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created todo object"
+        required: true
+        schema:
+          $ref: "#/definitions/todos"
+      responses:
+        default:
+          description: "successful operation"
+    get:
+      tags:
+      - "todo"
+      summary: "Get all todos"
+      description: ""
+      operationId: "getTodos"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/todos"
+        "400":
+          description: "Invalid supplied"
+        "404":
+          description: "Todos not found"
+    delete:
+      tags:
+      - "todo"
+      summary: "Delete todos"
+      operationId: "deleteAllTodos"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Invalid todo supplied"
+        "404":
+          description: "Todo not found"
+  /todo/{id}:
+    get:
+      tags:
+      - "todo"
+      summary: "Get todo by id"
+      description: ""
+      operationId: "getTodoById"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/todos"
+        "400":
+          description: "Invalid id supplied"
+        "404":
+          description: "Todo not found"
+    put:
+      tags:
+      - "todo"
+      summary: "Updated todo"
+      operationId: "updateTodo"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Updated Todo object"
+        required: true
+        schema:
+          $ref: "#/definitions/todos"
+      responses:
+        "400":
+          description: "Invalid todo supplied"
+        "404":
+          description: "todo not found"
+    delete:
+      tags:
+      - "todo"
+      summary: "Delete todo"
+      operationId: "deleteTodo"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "400":
+          description: "Invalid todo supplied"
+        "404":
+          description: "Todo not found"
+definitions:
+  todos:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      task:
+        type: "string"
+    xml:
+      name: "todo"
